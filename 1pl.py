@@ -34,8 +34,8 @@ def terminate():
 
 def start_screen():
     intro_text = ["ЗАСТАВКА", "",
-                  "Перед стартом введите название карты:",
-                  "Можно выбрать из следующих вариантов",
+                  "Правила игры",
+                  "Если в правилах несколько строк,",
                   "приходится выводить их построчно"]
 
     fon = pygame.transform.scale(load_image('fon.jpg'), (WIDTH, HEIGHT))
@@ -140,8 +140,12 @@ def generate_level(level):
     return new_player, x, y
 
 
-player, level_x, level_y = generate_level(load_level('map.txt'))
-# camera = Camera()
+filename = input()
+path = os.path.join('data', filename)
+if os.path.exists(os.path.join('data', filename)):
+    player, level_x, level_y = generate_level(load_level(filename))
+else:
+    terminate()
 clock = pygame.time.Clock()
 start_screen()
 while True:
